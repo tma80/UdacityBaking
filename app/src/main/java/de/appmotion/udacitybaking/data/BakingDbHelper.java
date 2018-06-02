@@ -160,7 +160,7 @@ public class BakingDbHelper extends SQLiteOpenHelper {
   @Override public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
     // For now simply drop the tables and create new ones. This means if you change the
     // DATABASE_VERSION the tables will be dropped.
-    // TODO: In a production app, this method might be modified to ALTER the tables instead of dropping them, so that existing data is not deleted.
+    // INFO: In a production app, this method might be modified to ALTER the tables instead of dropping them, so that existing data is not deleted.
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + RecipeEntry.TABLE_NAME);
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + RecipeIngredientEntry.TABLE_NAME);
     sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + RecipeStepEntry.TABLE_NAME);
