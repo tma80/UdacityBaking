@@ -2,10 +2,8 @@ package de.appmotion.udacitybaking.utilities;
 
 import android.content.ContentValues;
 import de.appmotion.udacitybaking.data.BakingContract;
-import java.util.ArrayList;
+import java.lang.reflect.Array;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,7 +72,7 @@ public final class RecipesJsonUtils {
         /* Recipe Ingredient data */
         JSONArray recipeIngredientJsonArray = recipeJsonObject.optJSONArray(RECIPE_INGREDIENT_ARRAY);
         if (recipeIngredientJsonArray != null) {
-          recipeIngredientContentValues = new ContentValues[recipeIngredientJsonArray.length()];
+          ContentValues[] recipeIngredientContentValuesTemp = new ContentValues[recipeIngredientJsonArray.length()];
           for (int j = 0; j < recipeIngredientJsonArray.length(); j++) {
             JSONObject recipeIngredientJsonObject = recipeIngredientJsonArray.optJSONObject(j);
 
@@ -89,15 +87,16 @@ public final class RecipesJsonUtils {
               recipeIngredientValues.put(BakingContract.RecipeIngredientEntry.COLUMN_MEASURE, recipeIngredientMeasure);
               recipeIngredientValues.put(BakingContract.RecipeIngredientEntry.COLUMN_QUANTITY, recipeIngredientQuantity);
 
-              recipeIngredientContentValues[i] = recipeIngredientValues;
+              recipeIngredientContentValuesTemp[j] = recipeIngredientValues;
             }
           }
+          recipeIngredientContentValues = concatenate(recipeIngredientContentValues, recipeIngredientContentValuesTemp);
         }
 
         /* Recipe Step data */
         JSONArray recipeStepJsonArray = recipeJsonObject.optJSONArray(RECIPE_STEP_ARRAY);
         if (recipeStepJsonArray != null) {
-          recipeStepContentValues = new ContentValues[recipeStepJsonArray.length()];
+          ContentValues[] recipeStepContentValuesTemp = new ContentValues[recipeStepJsonArray.length()];
           for (int k = 0; k < recipeStepJsonArray.length(); k++) {
             JSONObject recipeStepJsonObject = recipeStepJsonArray.optJSONObject(k);
             if (recipeStepJsonObject != null) {
@@ -115,12 +114,11 @@ public final class RecipesJsonUtils {
               recipeStepValues.put(BakingContract.RecipeStepEntry.COLUMN_THUMBNAIL_URL, recipeStepThumbnailUrl);
               recipeStepValues.put(BakingContract.RecipeStepEntry.COLUMN_VIDEO_URL, recipeStepVideoUrl);
 
-              recipeStepContentValues[i] = recipeStepValues;
+              recipeStepContentValuesTemp[k] = recipeStepValues;
             }
-
           }
+          recipeStepContentValues = concatenate(recipeStepContentValues, recipeStepContentValuesTemp);
         }
-
       }
     }
 
@@ -129,5 +127,24 @@ public final class RecipesJsonUtils {
     mapOfContentValues.put("recipe_step", recipeStepContentValues);
 
     return mapOfContentValues;
+  }
+
+  /**
+   * Concatenate two {@link Array}s
+   *
+   * @param a Array a
+   * @param b Array b
+   * @param <T> Type of Array
+   * @return new Array consisting of Array a and Array b
+   */
+  private static <T> T[] concatenate(T[] a, T[] b) {
+    int aLen = a.length;
+    int bLen = b.length;
+
+    @SuppressWarnings("unchecked") T[] c = (T[]) Array.newInstance(a.getClass().getComponentType(), aLen + bLen);
+    System.arraycopy(a, 0, c, 0, aLen);
+    System.arraycopy(b, 0, c, aLen, bLen);
+
+    return c;
   }
 }

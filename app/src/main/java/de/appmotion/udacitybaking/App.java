@@ -34,7 +34,11 @@ public class App extends Application {
     // OkHttpClient
     int cacheSize = 50 * 1024 * 1024; // 50 MiB
     Cache cache = new Cache(getCacheDir(), cacheSize);
-    okHttpClient = new OkHttpClient.Builder().cache(cache).connectTimeout(2L, TimeUnit.SECONDS).readTimeout(5L, TimeUnit.SECONDS).build();
+    okHttpClient = new OkHttpClient.Builder()
+        .cache(cache)
+        .connectTimeout(2L, TimeUnit.SECONDS)
+        .readTimeout(5L, TimeUnit.SECONDS)
+        .build();
 
     // Picasso with configured okHttpClient
     Picasso.Builder builder = new Picasso.Builder(this);

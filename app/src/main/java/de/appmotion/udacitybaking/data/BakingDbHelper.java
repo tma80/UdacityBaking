@@ -105,8 +105,6 @@ public class BakingDbHelper extends SQLiteOpenHelper {
 
             RecipeIngredientEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
 
-            "UNIQUE (" + RecipeIngredientEntry.COLUMN_RECIPE_ID + ") ON CONFLICT REPLACE, " +
-
             "FOREIGN KEY (" + RecipeIngredientEntry.COLUMN_RECIPE_ID  + ") REFERENCES " + RecipeEntry.TABLE_NAME + " (" + RecipeEntry.COLUMN_RECIPE_ID + "))";
 
     /*
@@ -137,8 +135,6 @@ public class BakingDbHelper extends SQLiteOpenHelper {
             RecipeStepEntry.COLUMN_VIDEO_URL + " TEXT NOT NULL, " +
 
             RecipeStepEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
-
-            "UNIQUE (" + RecipeStepEntry.COLUMN_RECIPE_ID + ") ON CONFLICT REPLACE, " +
 
             "FOREIGN KEY (" + RecipeStepEntry.COLUMN_RECIPE_ID  + ") REFERENCES " + RecipeEntry.TABLE_NAME + " (" + RecipeEntry.COLUMN_RECIPE_ID + "))";
 

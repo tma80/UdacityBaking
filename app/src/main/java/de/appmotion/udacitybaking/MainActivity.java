@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import de.appmotion.udacitybaking.sync.BakingSyncIntentService;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     NavigationView navigationView = findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
+
+    BakingSyncIntentService.startImmediateSync(this);
   }
 
   @Override public void onBackPressed() {

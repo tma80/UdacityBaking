@@ -17,9 +17,7 @@ public class BakingSyncTask {
 
   /**
    * Performs the network request for recipes, parses the JSON from that request, and
-   * inserts the new recipe information into our ContentProvider. Will notify the user that new
-   * recipes have been loaded if the user hasn't been notified of the weather within the last day
-   * AND they haven't disabled notifications in the preferences screen.
+   * inserts the new recipe information into our ContentProvider.
    *
    * @param context Used to access utility methods and the ContentResolver
    */
@@ -42,14 +40,23 @@ public class BakingSyncTask {
 
       // Insert Recipe values
       if (recipeContentValues.length != 0) {
+        // Delete old data because we do not want duplicates
+        bakingContentResolver.delete(BakingContract.RecipeEntry.CONTENT_URI, null, null);
+        // Insert values
         bakingContentResolver.bulkInsert(BakingContract.RecipeEntry.CONTENT_URI, recipeContentValues);
       }
       // Insert Recipe Ingredient
       if (recipeIngredientContentValues.length != 0) {
+        // Delete old data because we do not want duplicates
+        bakingContentResolver.delete(BakingContract.RecipeIngredientEntry.CONTENT_URI, null, null);
+        // Insert values
         bakingContentResolver.bulkInsert(BakingContract.RecipeIngredientEntry.CONTENT_URI, recipeIngredientContentValues);
       }
       // Insert Recipe Step
       if (recipeStepContentValues.length != 0) {
+        // Delete old data because we do not want duplicates
+        bakingContentResolver.delete(BakingContract.RecipeStepEntry.CONTENT_URI, null, null);
+        // Insert values
         bakingContentResolver.bulkInsert(BakingContract.RecipeStepEntry.CONTENT_URI, recipeStepContentValues);
       }
     } catch (JSONException e) {
