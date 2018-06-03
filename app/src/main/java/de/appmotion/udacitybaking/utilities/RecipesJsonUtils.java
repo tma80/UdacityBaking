@@ -59,7 +59,7 @@ public final class RecipesJsonUtils {
         long recipeId = recipeJsonObject.optLong(RECIPE_ID, -1L);
         String recipeImage = recipeJsonObject.optString(RECIPE_IMAGE, "");
         String recipeName = recipeJsonObject.optString(RECIPE_NAME, "");
-        String recipeServing = recipeJsonObject.optString(RECIPE_SERVING, "");
+        int recipeServing = recipeJsonObject.optInt(RECIPE_SERVING, 0);
 
         ContentValues recipeValues = new ContentValues();
         recipeValues.put(BakingContract.RecipeEntry.COLUMN_RECIPE_ID, recipeId);
@@ -79,7 +79,7 @@ public final class RecipesJsonUtils {
             if (recipeIngredientJsonObject != null) {
               String recipeIngredient = recipeIngredientJsonObject.optString(RECIPE_INGREDIENT, "");
               String recipeIngredientMeasure = recipeIngredientJsonObject.optString(RECIPE_INGREDIENT_MEASURE, "");
-              String recipeIngredientQuantity = recipeIngredientJsonObject.optString(RECIPE_INGREDIENT_QUANTITY, "");
+              int recipeIngredientQuantity = recipeIngredientJsonObject.optInt(RECIPE_INGREDIENT_QUANTITY, 0);
 
               ContentValues recipeIngredientValues = new ContentValues();
               recipeIngredientValues.put(BakingContract.RecipeIngredientEntry.COLUMN_RECIPE_ID, recipeId); // foreign key
@@ -100,7 +100,7 @@ public final class RecipesJsonUtils {
           for (int k = 0; k < recipeStepJsonArray.length(); k++) {
             JSONObject recipeStepJsonObject = recipeStepJsonArray.optJSONObject(k);
             if (recipeStepJsonObject != null) {
-              String recipeStepId = recipeStepJsonObject.optString(RECIPE_STEP_ID, "");
+              int recipeStepId = recipeStepJsonObject.optInt(RECIPE_STEP_ID, -1);
               String recipeStepDescription = recipeStepJsonObject.optString(RECIPE_STEP_DESCRIPTION, "");
               String recipeStepDescriptionShort = recipeStepJsonObject.optString(RECIPE_STEP_DESCRIPTION_SHORT, "");
               String recipeStepThumbnailUrl = recipeStepJsonObject.optString(RECIPE_STEP_THUMBNAIL_URL, "");
