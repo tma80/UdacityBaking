@@ -63,6 +63,7 @@ public final class NetworkUtils {
         case HttpURLConnection.HTTP_OK:
           ResponseBody responseBody = response.body();
           if (responseBody == null) {
+            Log.d(TAG, queryUrl.toString() + ": Empty response from server");
             return EMPTY;
           }
           Scanner scanner = new Scanner(responseBody.byteStream());

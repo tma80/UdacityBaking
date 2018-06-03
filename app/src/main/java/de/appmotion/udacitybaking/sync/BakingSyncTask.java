@@ -28,6 +28,17 @@ public class BakingSyncTask {
 
       /* Use the URL to retrieve the JSON */
       String jsonRecipesResponse = NetworkUtils.getWithOkHttp(recipesRequestUrl);
+      /* Cancel sync if the response contains an error */
+      switch (jsonRecipesResponse) {
+        case NetworkUtils.EMPTY:
+          return;
+        case NetworkUtils.API_ERROR:
+          return;
+        case NetworkUtils.API_FORBIDDEN:
+          return;
+        case NetworkUtils.OFFLINE:
+          return;
+      }
 
       /* Parse the JSON into a HashMap of recipe values */
       HashMap<String, ContentValues[]> recipeValuesMap = RecipesJsonUtils.getRecipeContentValuesFromJson(jsonRecipesResponse);
