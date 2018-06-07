@@ -6,4 +6,11 @@
   <string name="nav_header_subtitle">android.studio@android.com</string>
   <string name="nav_header_desc">Navigation header</string>
   <string name="action_settings">Settings</string>
+
+  <!-- Main recipe list -->
+  <string name="recipe">Recipe</string>
+  <string name="no_data_available">No data available</string>
+
+  <!-- Used for Accessibility purposes (Accessibility == a11y) -->
+  <string name="a11y_recipe_image">Recipe image</string>
 </resources>
