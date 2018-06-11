@@ -5,36 +5,45 @@
     >
 
   <android.support.v7.widget.CardView
+      android:id="@+id/recipe_card"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_margin="8dp"
+      android:layout_height="192dp"
+      android:layout_margin="16dp"
       app:cardCornerRadius="8dp"
-      app:cardElevation="8dp"
+      app:cardElevation="4dp"
       >
 
     <ImageView
         android:id="@+id/recipe_image"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:alpha="0.2"
         android:background="@drawable/card_edge"
         android:contentDescription="@string/a11y_recipe_image"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/ic_image_black_24dp"
+        app:srcCompat="@drawable/leak_canary_icon"
         />
 
-    <TextView
-        android:id="@+id/recipe_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/recipe"
-        android:textColor="@color/primary_text"
-        android:textSize="@dimen/recipe_name_text_size"
-        />
+    <!-- Blur the Views behind the contained TextView-->
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/recipe_image_blur_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+      <TextView
+          android:id="@+id/recipe_name"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:fontFamily="serif"
+          android:gravity="center"
+          android:text="@string/recipe"
+          android:textColor="@color/primary_text"
+          android:textSize="@dimen/recipe_name_text_size"
+          />
+
+    </eightbitlab.com.blurview.BlurView>
 
   </android.support.v7.widget.CardView>
 

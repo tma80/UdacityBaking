@@ -31,6 +31,8 @@ dependencies {
   // OkHttp with Okio
   implementation 'com.squareup.okhttp3:okhttp:3.8.1'
   implementation 'com.squareup.okio:okio:1.13.0'
+  // BlurView
+  implementation 'com.eightbitlab:blurview:1.4.0'
   // LeakCanary
   debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
   releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'

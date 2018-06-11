@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import de.appmotion.udacitybaking.data.BakingContract;
 import de.appmotion.udacitybaking.data.model.Recipe;
 import de.appmotion.udacitybaking.databinding.RecipeCardBinding;
+import eightbitlab.com.blurview.RenderScriptBlur;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Recipe} from a {@link Cursor}.
@@ -134,10 +135,12 @@ class RecipeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
               @Override public void onError() {
               }
             });
-      }
-      else {
+      } else {
         mItemBinding.recipeImage.setImageResource(R.drawable.ic_image_black_24dp);
       }
+
+      // Recipe Image BlurView
+      mItemBinding.recipeImageBlurView.setupWith(mItemBinding.recipeCard).blurAlgorithm(new RenderScriptBlur(mContext)).blurRadius(4.0f);
     }
 
     /**
