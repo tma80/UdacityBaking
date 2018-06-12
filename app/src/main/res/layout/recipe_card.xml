@@ -22,7 +22,7 @@
         android:background="@drawable/card_edge"
         android:contentDescription="@string/a11y_recipe_image"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/leak_canary_icon"
+        app:srcCompat="@drawable/ic_image_black_24dp"
         />
 
     <!-- Blur the Views behind the contained TextView-->

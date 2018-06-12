@@ -31,12 +31,16 @@ public class BakingSyncTask {
       /* Cancel sync if the response contains an error */
       switch (jsonRecipesResponse) {
         case NetworkUtils.EMPTY:
+          context.getContentResolver().notifyChange(BakingContract.RecipeEntry.CONTENT_URI, null);
           return;
         case NetworkUtils.API_ERROR:
+          context.getContentResolver().notifyChange(BakingContract.RecipeEntry.CONTENT_URI, null);
           return;
         case NetworkUtils.API_FORBIDDEN:
+          context.getContentResolver().notifyChange(BakingContract.RecipeEntry.CONTENT_URI, null);
           return;
         case NetworkUtils.OFFLINE:
+          context.getContentResolver().notifyChange(BakingContract.RecipeEntry.CONTENT_URI, null);
           return;
       }
 

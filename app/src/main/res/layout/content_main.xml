@@ -22,12 +22,13 @@
         />
 
     <!-- A progress bar that will be shown to users to indicate that recipe data is loading -->
-    <ProgressBar
+    <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/loading_view"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:visibility="invisible"
+        style="?android:attr/progressBarStyle"
         />
 
     <TextView
