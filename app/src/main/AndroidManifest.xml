@@ -17,14 +17,36 @@
       tools:ignore="GoogleAppIndexingWarning"
       tools:replace="android:allowBackup,android:supportsRtl">
 
+    <!-- MainActivity -->
     <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
+
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
+    </activity>
+    <!-- RecipeDetailActivity -->
+    <activity
+        android:name=".RecipeDetailActivity"
+        android:label="@string/recipe_detail"
+        android:parentActivityName=".MainActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value="de.appmotion.udacitybaking.MainActivity"/>
+    </activity>
+    <!-- RecipeDetailStepActivity -->
+    <activity
+        android:name=".RecipeDetailStepActivity"
+        android:label="@string/recipe_detail_step"
+        android:parentActivityName=".RecipeDetailActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value="de.appmotion.udacitybaking.RecipeDetailActivity"/>
     </activity>
 
     <!-- Our ContentProvider -->
@@ -33,10 +55,10 @@
         android:authorities="de.appmotion.udacitybaking"
         android:exported="false"/>
 
-    <!--IntentService which runs data sync  -->
+    <!-- IntentService which runs data sync -->
     <service
         android:name=".sync.BakingSyncIntentService"
-        android:exported="false" />
+        android:exported="false"/>
 
   </application>
 

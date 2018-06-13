@@ -1,5 +1,6 @@
 package de.appmotion.udacitybaking;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -26,6 +27,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainActivity extends BaseActivity
     implements NavigationView.OnNavigationItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor>, RecipeAdapter.ListItemClickListener {
+
+  // Constant for logging
+  private static final String TAG = MainActivity.class.getSimpleName();
 
   // This number will uniquely identify a CursorLoader for loading data from 'recipe' DB table.
   private static final int CURSOR_LOADER_RECIPE = 1;
@@ -224,7 +228,11 @@ public class MainActivity extends BaseActivity
   }
 
   @Override public void onListItemClick(Recipe recipe) {
-    showMessage(recipe.getName());
+    //showMessage(recipe.getName());
+    // Show RecipeDetailActivity
+    Intent intent = new Intent(this, RecipeDetailActivity.class);
+    intent.putExtra(RecipeDetailActivity.EXTRA_RECIPE_OBJECT, recipe);
+    startActivity(intent);
   }
 
   private void updateValuesFromBundle(Bundle savedInstanceState) {

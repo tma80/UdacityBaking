@@ -8,4 +8,8 @@
 
   <!-- Text Sizes -->
   <dimen name="recipe_name_text_size">28dp</dimen>
+
+  <!-- Recipe item Sizes -->
+  <dimen name="item_width">200dp</dimen>
+  <dimen name="text_margin">16dp</dimen>
 </resources>

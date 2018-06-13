@@ -11,6 +11,12 @@
   <string name="recipe">Recipe</string>
   <string name="no_data_available">No data available</string>
 
+  <!-- Recipe detail -->
+  <string name="recipe_detail">Recipe Detail</string>
+
+  <!-- Recipe detail step -->
+  <string name="recipe_detail_step">Recipe Detail Step</string>
+
   <!-- Used for Accessibility purposes (Accessibility == a11y) -->
   <string name="a11y_recipe_image">Recipe image</string>
 </resources>
