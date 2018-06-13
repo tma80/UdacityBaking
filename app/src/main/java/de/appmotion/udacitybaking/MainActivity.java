@@ -227,7 +227,7 @@ public class MainActivity extends BaseActivity
     mRecipeAdapter.swapCursor(null);
   }
 
-  @Override public void onListItemClick(Recipe recipe) {
+  @Override public void onListItemClick(@NonNull Recipe recipe) {
     //showMessage(recipe.getName());
     // Show RecipeDetailActivity
     Intent intent = new Intent(this, RecipeDetailActivity.class);

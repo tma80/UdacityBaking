@@ -16,6 +16,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
+import de.appmotion.udacitybaking.data.model.Recipe;
 import de.appmotion.udacitybaking.dummy.DummyContent;
 
 import java.util.List;
@@ -35,19 +36,25 @@ public class RecipeDetailActivity extends BaseActivity {
 
   public final static String EXTRA_RECIPE_OBJECT = BuildConfig.APPLICATION_ID + ".recipe_object";
 
+  private Recipe mRecipe;
+
   /**
    * Whether or not the activity is in two-pane mode, i.e. running on a tablet
    * device.
    */
   private boolean mTwoPane;
+  private Toolbar toolbar;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_recipe_detail);
 
-    Toolbar toolbar = findViewById(R.id.toolbar);
+    toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-    toolbar.setTitle(getTitle());
+
+    if (getIntent() != null && getIntent().hasExtra(EXTRA_RECIPE_OBJECT)) {
+      mRecipe = getIntent().getParcelableExtra(EXTRA_RECIPE_OBJECT);
+    }
 
     FloatingActionButton fab = findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +81,24 @@ public class RecipeDetailActivity extends BaseActivity {
     setupRecyclerView((RecyclerView) recyclerView);
   }
 
+  @Override protected void onResume() {
+    super.onResume();
+    if (mRecipe != null) {
+      toolbar.setTitle(mRecipe.getName());
+      setTitle(mRecipe.getName());
+    } else {
+      toolbar.setTitle(getTitle());
+    }
+  }
+
+  /*
+  @Override
+  public boolean onSupportNavigateUp() {
+    onBackPressed();
+    return true;
+  }
+  */
+
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     int id = item.getItemId();
     if (id == android.R.id.home) {
@@ -87,6 +112,7 @@ public class RecipeDetailActivity extends BaseActivity {
       NavUtils.navigateUpFromSameTask(this);
       return true;
     }
+
     return super.onOptionsItemSelected(item);
   }
 
