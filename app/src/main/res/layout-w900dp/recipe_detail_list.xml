@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:baselineAligned="false"
-    android:divider="?android:attr/dividerHorizontal"
-    android:orientation="horizontal"
-    android:showDividers="middle"
-    tools:context=".RecipeDetailActivity"
     >
 
-  <!--
-    This layout is a two-pane layout for the TestItems
-    master/detail flow.
-    
-    -->
-
-  <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:tools="http://schemas.android.com/tools"
-      android:id="@+id/recipe_detail_list"
-      android:layout_width="@dimen/item_width"
+  <LinearLayout
+      android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_marginLeft="16dp"
       android:layout_marginRight="16dp"
-      app:layoutManager="LinearLayoutManager"
-      tools:context="de.appmotion.udacitybaking.RecipeDetailActivity"
-      tools:listitem="@layout/recipe_detail_list_content"
-      />
+      android:baselineAligned="false"
+      android:divider="?android:attr/dividerHorizontal"
+      android:orientation="horizontal"
+      android:showDividers="middle"
+      tools:context=".view.recipedetail.RecipeDetailActivity"
+      >
 
-  <FrameLayout
-      android:id="@+id/recipe_detail_container"
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="3"
-      />
+    <!--
+      This layout is a two-pane layout for the TestItems
+      master/detail flow.
 
-</LinearLayout>
+      -->
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/recyclerview"
+        android:layout_width="@dimen/item_width"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="de.appmotion.udacitybaking.view.recipedetail.RecipeDetailActivity"
+        tools:listitem="@layout/recipe_detail_list_content"
+        />
+
+    <FrameLayout
+        android:id="@+id/recipe_detail_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        />
+
+  </LinearLayout>
+
+</layout>

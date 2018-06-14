@@ -11,7 +11,7 @@ import de.appmotion.udacitybaking.data.BakingContract;
 public final class Recipe implements Parcelable {
 
   private long mId;
-  private long mReceipeId;
+  private long mRecipeId;
   private String mImage;
   private String mName;
   private int mServing;
@@ -22,7 +22,7 @@ public final class Recipe implements Parcelable {
 
   protected Recipe(Parcel in) {
     mId = in.readLong();
-    mReceipeId = in.readLong();
+    mRecipeId = in.readLong();
     mImage = in.readString();
     mName = in.readString();
     mServing = in.readInt();
@@ -37,7 +37,7 @@ public final class Recipe implements Parcelable {
   public static Recipe from(Cursor cursor) {
     final Recipe recipe = new Recipe();
     recipe.setId(cursor.getLong(cursor.getColumnIndexOrThrow(BakingContract.RecipeEntry._ID)));
-    recipe.setReceipeId(cursor.getLong(cursor.getColumnIndexOrThrow(BakingContract.RecipeEntry.COLUMN_RECIPE_ID)));
+    recipe.setRecipeId(cursor.getLong(cursor.getColumnIndexOrThrow(BakingContract.RecipeEntry.COLUMN_RECIPE_ID)));
     recipe.setImage(cursor.getString(cursor.getColumnIndexOrThrow(BakingContract.RecipeEntry.COLUMN_IMAGE)));
     recipe.setName(cursor.getString(cursor.getColumnIndexOrThrow(BakingContract.RecipeEntry.COLUMN_NAME)));
     recipe.setServing(cursor.getInt(cursor.getColumnIndexOrThrow(BakingContract.RecipeEntry.COLUMN_SERVING)));
@@ -53,12 +53,12 @@ public final class Recipe implements Parcelable {
     mId = id;
   }
 
-  public long getReceipeId() {
-    return mReceipeId;
+  public long getRecipeId() {
+    return mRecipeId;
   }
 
-  public void setReceipeId(long receipeId) {
-    mReceipeId = receipeId;
+  public void setRecipeId(long recipeId) {
+    mRecipeId = recipeId;
   }
 
   public String getImage() {
@@ -99,7 +99,7 @@ public final class Recipe implements Parcelable {
 
   @Override public void writeToParcel(Parcel dest, int flags) {
     dest.writeLong(mId);
-    dest.writeLong(mReceipeId);
+    dest.writeLong(mRecipeId);
     dest.writeString(mImage);
     dest.writeString(mName);
     dest.writeInt(mServing);

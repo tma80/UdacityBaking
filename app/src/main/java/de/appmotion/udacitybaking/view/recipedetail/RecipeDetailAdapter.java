@@ -1,4 +1,4 @@
-package de.appmotion.udacitybaking;
+package de.appmotion.udacitybaking.view.recipedetail;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,25 +8,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import de.appmotion.udacitybaking.R;
 import de.appmotion.udacitybaking.data.BakingContract;
-import de.appmotion.udacitybaking.data.model.Recipe;
+import de.appmotion.udacitybaking.data.model.RecipeStep;
 import de.appmotion.udacitybaking.databinding.RecipeCardBinding;
-import eightbitlab.com.blurview.RenderScriptBlur;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link Recipe} from a {@link Cursor}.
+ * {@link RecyclerView.Adapter} that can display a {@link RecipeStep} from a {@link Cursor}.
  */
-class RecipeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class RecipeDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private static final int VIEW_TYPE_DEFAULT = 0;
   private final Context mContext;
   private final ListItemClickListener mOnClickListener;
-  // Holds on to the cursor to display the recipe list
+  // Holds on to the cursor to display the step list
   private Cursor mCursor;
 
-  RecipeAdapter(@NonNull Context context, ListItemClickListener listener) {
+  RecipeDetailAdapter(@NonNull Context context, ListItemClickListener listener) {
     mContext = context;
     mOnClickListener = listener;
     setHasStableIds(true);
@@ -44,7 +42,7 @@ class RecipeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     switch (viewType) {
       case VIEW_TYPE_DEFAULT: {
         final View view = inflater.inflate(R.layout.recipe_card, parent, false);
-        viewHolder = new ViewHolderRecipeItem(view);
+        viewHolder = new ViewHolderSteptItem(view);
         break;
       }
       default:
@@ -65,7 +63,7 @@ class RecipeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     switch (viewType) {
       case VIEW_TYPE_DEFAULT: {
-        final ViewHolderRecipeItem viewHolder = (ViewHolderRecipeItem) holder;
+        final ViewHolderSteptItem viewHolder = (ViewHolderSteptItem) holder;
         viewHolder.bind();
         break;
       }
@@ -103,44 +101,23 @@ class RecipeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
    * The interface that receives onClick messages.
    */
   public interface ListItemClickListener {
-    void onListItemClick(Recipe recipe);
+    void onListItemClick(RecipeStep step);
   }
 
-  private class ViewHolderRecipeItem extends RecyclerView.ViewHolder implements View.OnClickListener {
+  private class ViewHolderSteptItem extends RecyclerView.ViewHolder implements View.OnClickListener {
     RecipeCardBinding mItemBinding;
 
-    ViewHolderRecipeItem(View itemView) {
+    ViewHolderSteptItem(View itemView) {
       super(itemView);
       mItemBinding = DataBindingUtil.bind(itemView);
       itemView.setOnClickListener(this);
     }
 
     void bind() {
-      final Recipe recipe = Recipe.from(mCursor);
+      final RecipeStep step = RecipeStep.from(mCursor);
 
-      // Recipe Name
-      mItemBinding.recipeName.setText(recipe.getName());
-
-      // Recipe Image
-      String recipeImage = recipe.getImage();
-      if (recipeImage.trim().length() != 0) {
-        Picasso.with(itemView.getContext())
-            .load(recipeImage)
-            .placeholder(android.R.drawable.screen_background_light_transparent)
-            .error(R.drawable.ic_image_black_24dp)
-            .into(mItemBinding.recipeImage, new Callback() {
-              @Override public void onSuccess() {
-              }
-
-              @Override public void onError() {
-              }
-            });
-      } else {
-        mItemBinding.recipeImage.setImageResource(R.drawable.ic_image_black_24dp);
-      }
-
-      // Recipe Image BlurView
-      mItemBinding.recipeImageBlurView.setupWith(mItemBinding.recipeCard).blurAlgorithm(new RenderScriptBlur(mContext)).blurRadius(4.0f);
+      // Step Description short
+      mItemBinding.recipeName.setText(step.getDescriptionShort());
     }
 
     /**
@@ -151,8 +128,8 @@ class RecipeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override public void onClick(View v) {
       int adapterPosition = getAdapterPosition();
       mCursor.moveToPosition(adapterPosition);
-      final Recipe recipe = Recipe.from(mCursor);
-      mOnClickListener.onListItemClick(recipe);
+      final RecipeStep step = RecipeStep.from(mCursor);
+      mOnClickListener.onListItemClick(step);
     }
   }
 }

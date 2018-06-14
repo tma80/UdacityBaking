@@ -1,4 +1,4 @@
-package de.appmotion.udacitybaking;
+package de.appmotion.udacitybaking.view.recipe;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,6 +19,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import de.appmotion.udacitybaking.view.BaseActivity;
+import de.appmotion.udacitybaking.R;
+import de.appmotion.udacitybaking.view.recipedetail.RecipeDetailActivity;
 import de.appmotion.udacitybaking.data.BakingContract;
 import de.appmotion.udacitybaking.data.model.Recipe;
 import de.appmotion.udacitybaking.databinding.ActivityMainBinding;
@@ -34,10 +37,10 @@ public class MainActivity extends BaseActivity
   // This number will uniquely identify a CursorLoader for loading data from 'recipe' DB table.
   private static final int CURSOR_LOADER_RECIPE = 1;
 
-  // Save {@link MenuState} via onSaveInstanceState
-  private static final String STATE_RECIPE_LIST_POSITION = "recipe_list_position";
+  // Save Position of recipe list via onSaveInstanceState
+  private static final String STATE_LIST_POSITION = "list_position";
 
-  private int mRecipeListPosition = RecyclerView.NO_POSITION;
+  private int mListPosition = RecyclerView.NO_POSITION;
 
   private ActivityMainBinding mMainBinding;
   private RecipeAdapter mRecipeAdapter;
@@ -98,12 +101,12 @@ public class MainActivity extends BaseActivity
 
   @Override protected void onPause() {
     super.onPause();
-    mRecipeListPosition = ((LinearLayoutManager) mMainBinding.appBar.content.recyclerview.getLayoutManager()).findFirstVisibleItemPosition();
+    mListPosition = ((LinearLayoutManager) mMainBinding.appBar.content.recyclerview.getLayoutManager()).findFirstVisibleItemPosition();
   }
 
   @Override protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    outState.putInt(STATE_RECIPE_LIST_POSITION, mRecipeListPosition);
+    outState.putInt(STATE_LIST_POSITION, mListPosition);
   }
 
 
@@ -199,10 +202,10 @@ public class MainActivity extends BaseActivity
             // Show data from ContentProvider query
             showRecipeDataView();
             mRecipeAdapter.swapCursor(cursor);
-            if (mRecipeListPosition == RecyclerView.NO_POSITION) {
-              mRecipeListPosition = 0;
+            if (mListPosition == RecyclerView.NO_POSITION) {
+              mListPosition = 0;
             }
-            mMainBinding.appBar.content.recyclerview.smoothScrollToPosition(mRecipeListPosition);
+            mMainBinding.appBar.content.recyclerview.smoothScrollToPosition(mListPosition);
           }
           // Data empty
           else {
@@ -237,8 +240,8 @@ public class MainActivity extends BaseActivity
 
   private void updateValuesFromBundle(Bundle savedInstanceState) {
     if (savedInstanceState != null) {
-      if (savedInstanceState.keySet().contains(STATE_RECIPE_LIST_POSITION)) {
-        mRecipeListPosition = savedInstanceState.getInt(STATE_RECIPE_LIST_POSITION, RecyclerView.NO_POSITION);
+      if (savedInstanceState.keySet().contains(STATE_LIST_POSITION)) {
+        mListPosition = savedInstanceState.getInt(STATE_LIST_POSITION, RecyclerView.NO_POSITION);
       }
     }
   }

@@ -19,7 +19,7 @@
 
     <!-- MainActivity -->
     <activity
-        android:name=".MainActivity"
+        android:name=".view.recipe.MainActivity"
         android:label="@string/app_name"
         android:launchMode="singleTop"
         android:theme="@style/AppTheme.NoActionBar">
@@ -31,25 +31,25 @@
     </activity>
     <!-- RecipeDetailActivity -->
     <activity
-        android:name=".RecipeDetailActivity"
+        android:name=".view.recipedetail.RecipeDetailActivity"
         android:label="@string/recipe_detail"
         android:launchMode="singleTop"
-        android:parentActivityName=".MainActivity"
+        android:parentActivityName=".view.recipe.MainActivity"
         android:theme="@style/AppTheme.NoActionBar">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
-          android:value="de.appmotion.udacitybaking.MainActivity"/>
+          android:value="de.appmotion.udacitybaking.view.recipe.MainActivity"/>
     </activity>
     <!-- RecipeDetailStepActivity -->
     <activity
-        android:name=".RecipeDetailStepActivity"
+        android:name=".view.recipedetailstep.RecipeDetailStepActivity"
         android:label="@string/recipe_detail_step"
         android:launchMode="singleTop"
-        android:parentActivityName=".RecipeDetailActivity"
+        android:parentActivityName=".view.recipedetail.RecipeDetailActivity"
         android:theme="@style/AppTheme.NoActionBar">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
-          android:value="de.appmotion.udacitybaking.RecipeDetailActivity"/>
+          android:value="de.appmotion.udacitybaking.view.recipedetail.RecipeDetailActivity"/>
     </activity>
 
     <!-- Our ContentProvider -->

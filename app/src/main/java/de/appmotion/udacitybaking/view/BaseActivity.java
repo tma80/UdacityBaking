@@ -1,4 +1,4 @@
-package de.appmotion.udacitybaking;
+package de.appmotion.udacitybaking.view;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
